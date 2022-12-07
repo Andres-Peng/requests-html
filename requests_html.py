@@ -254,6 +254,8 @@ class BaseParser:
         :class:`Element <Element>` found.
         """
         selected = self.lxml.xpath(selector)
+        if isinstance(selected, str): # handle ``string(.)``
+            return selected
 
         elements = [
             Element(element=selection, url=self.url, default_encoding=_encoding or self.encoding)
